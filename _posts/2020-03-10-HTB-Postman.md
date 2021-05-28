@@ -1,14 +1,17 @@
 ---
 title:     "Hack The Box - Postman"
 tags: [linux,easy,redis,john]
+categories: HackTheBox
 ---
 
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/1.png)
+![](/img/hacktheboxpostman/img8.jpg)
 
-We are going to pwn Postman by TheCyberGeek from Hack The Box. I enjoyed the way to get user shell.
+We are going to pwn Postman, an Easy Level by TheCyberGeek from Hack The Box. 
+I will share all the process so take a cup of tea and let's get started.
 
 Link : <https://www.hackthebox.eu/home/machines/profile/215>
 
+## Enumeration
 
 Lets Begin with our Initial Nmap Scan.
 
@@ -42,119 +45,213 @@ Network Distance: 2 hops
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
-Begin with HTTP:
+
+Found that port 80 http is open, so a site must be running. 
+
+![](/img/hacktheboxpostman/img8.jpg)
 
 The site looks to be under construction.
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/2.png)
 The Only thing I got from webpage is email address at the bottom.
 
-Gobuster Results:
-```
-===============================================================
-Gobuster v3.0.1
-by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
-===============================================================
-[+] Url:            http://10.10.10.160
-[+] Threads:        10
-[+] Wordlist:       /usr/share/wordlists/dirb/common.txt
-[+] Status codes:   200,204,301,302,307,401,403
-[+] User Agent:     gobuster/3.0.1
-[+] Timeout:        10s
-===============================================================
-2019/12/05 00:41:42 Starting gobuster
-===============================================================
-/css (Status: 301)
-/fonts (Status: 301)
-/images (Status: 301)
-/index.html (Status: 200)
-/js (Status: 301)
-/server-status (Status: 403)
-/upload (Status: 301)
-===============================================================
-2019/12/05 00:43:54 Finished
-===============================================================
-```
-And Gobuster results doesn't reveal any useful directories.
+![](/img/hacktheboxpostman/img17.jpg)
 
-So I started checking other ports.
+![](/img/hacktheboxpostman/img19.jpg)
 
-Found that port ``6379`` - ``redis`` looks suspecious. I started searching for any vulnerabilities.
-Found this!
+Tried different wordlists with dirb but the results doesn't reveal any useful directories.
+/upload had nothing useful.
 
-> https://medium.com/@Victor.Z.Zhu/redis-unauthorized-access-vulnerability-simulation-victor-zhu-ac7a71b2e419
 
->Redis, is an open source, widely popular data structure tool that can be used as an in-memory distributed database, message broker or cache. Since it is designed to be accessed inside trusted environments, it should not be exposed on the Internet. However, some Redis’ are bind to public interface and even has no password authentication protection.
 
-So from the above statement we need to check whether redis has no password authentication. We can do that with ``telnet``
 
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/3.png)<br/>
-Yeah! It works it doesn't ask for any authentication. Now I can continue with the article.
 
-So First we need to create a ``ssh`` keys so I can enter the machine.
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/4.png)<br/>
-And I generated a pair of keys.<br/>
-We know that ``.pub`` must be inside the box so only we can connect it with our private key. And I changed that ``keys.pub`` to ``foo.txt`` with two blank lines before and after the public key.
 
-We can use ``redis-cli`` to get command line interface. We can install it with ``apt install redis-tools``.
+I tried connecting via telnet to
 
-> redis-cli - Command-line client to redis-server
+## Exploiting (Weew)
 
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/5.png)
+Maybe a Buffer Overflow Attack will help me exploitthis, but i need to run it from inside
+the machine. Since I know that my target was RedisKey-Value Store 4.0.9,
+I started searching about it’s exploits.
 
-```
--h Redis-Server which we need to connect 
+Since Buffer Overflow couldn't work, I tried Metasploit.
 
--x is saying that we are setting the key in redis named s-key with our pub key (foo.txt).
-```
 
-Yeah We send our pub key(foo.txt) successfully. Now its time to configure.
-We can connect the server using same ``redis-cli -h IP``.
+Found an Redis Unauthenticated Code Execution. I fired it up and set the options.
 
-Now What we want to do here is to store ``s-key`` (SSH public key) in the ``.ssh`` folder so that we can remote SSH login to the target machine.
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/6.png)
+But No Session was created. I tried with differentmethods and even searched online
+But couldn't find any solution to this script.
 
-So I created ``.ssh`` inside ``/var/lib/redis`` which we have permission.
-And Changed the name to ``authorized_keys`` and ``save``.
+## Exploiting 2.0(Yeeeeeeay)
 
-Now Our key is in ``/redis/.ssh`` so we can login as ``redis`` now with our private key.
+Started reading about the redis in detail and to seehow it works. It is used as an
+in-memory distributed database.
+Also found this Redis Unauthorized Access Vulnerabilitythat saved my life.
+https://medium.com/@Victor.Z.Zhu/redis-unauthorized-access-vulnerability-simulation-vi
+ctor-zhu-ac7a71b2e
 
-And we can now log in to the box with SSH
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/7.png)
+According to it,
+Under certain conditions, if Redis runs with the rootaccount (or not even), attackers can
+write an SSH public key file to the root account,directly logging on to the victim server
+through SSH. This may allow hackers to gain serverprivileges, delete or steal data, or
+even lead to an encryption extortion, critically endangeringnormal business services.
 
-So I searched for any interesting files in the box and got ``id_rsa.bak``
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/8.png)
+Nice. I looked at its simulation and started doingthe same process.
 
-We can crack the RSA Private Key using ``john``
-For that we need to use ``ssh2john`` first.
-If you don't have , you can get it from [here](https://github.com/koboi137/john/blob/bionic/ssh2john.py).
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/9.png)
+Also found another link with the same procedure,
+https://packetstormsecurity.com/files/134200/Redis-Remote-Command-Execution.html
+These blogs saved my life. So I downloaded the redistools on my machine and started
+doing the same steps.
 
-I copied the result and saved it as ``pass`` .Now we can use this to crack with ``john``
 
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/10.png)
+First we generate the SSH KEYS with passphrase (90909090 for this case)
+$ ssh-keygen -t rsa
 
-We got the password ``computer2008`` I saw the user from home dir. I tried SSH login with the password but I can't. Using ``su`` from the redis shell I can log in as ``Matt``.
+Remember, don't leave the passphrase empty. I triedwith an empty passphrase and
+encountered several problems, idk why. Keep it anything,just dont leave it empty.
 
-``matt : computer2008``<br/>
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/11.png)
+Next, enter the .ssh folder. If you are root user,enter /.ssh, otherwise ~/.ssh, then copy
+the private key into temp.txt. (or whatever.txt)
+$ (echo -e "\n\n"; cat id_rsa.pub; echo -e "\n\n")> temp.txt
+$ cat temp.txt (To Check the Key)
 
-## Privilege Escalation:
+So far we have generated a pair of keys, we will needto find a way to smuggle the
+public key to the Redis server.
+We are going to use redis-cli, the Redis command lineinterface, to send commands to
+Redis and read the replies sent by the server directlyin the terminal.
 
-We know port ``10000`` running ``Webmin 1.910``, which is an old version.
-There is an exploit, 
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/12.png)
 
-> https://www.exploit-db.com/exploits/46984
+$ cat temp.txt | redis-cli -h 10.10.10.160 -x setfok
 
-I fired up my metasploit and searched for the exploit and 
-Its asking for the ``USER`` and ``PASSWORD`` so I used the Matt user.
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/13.png)
+Once Done, we have a key with our SSH key sneakedin! Let’s connect to the Redis
+and play around its configuration. Use redis-cli toconnect to the Redis server again.
+Take a look at the site and follow the same commands.
 
-It worked <br/>
-![](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-postman/14.png)
+$ redis-cli -h 10.10.10.
+10.10.10.160:6379> get fok (key sent from previouscommand)
+10.10.10.160:6379> CONFIG GET dir (Tell which directoryyou are in)
+10.10.10.160:6379> CONFIG SET dir var/lib/redis/.ssh(set default directory of user
+redis)
+10.10.10.160:6379> CONFIG SET dbfilename authorized_keys( _The authorized_keys
+file in SSH specifies the SSH keys that can be usedfor logging into the user account_ )
+10.10.10.160:6379> save (save the key)
 
-I got Root!!
+Let’s Try to Connect with SSH
+$ ssh -i id_rsa redis@10.10.10.
+Enter your passphrase and voila!
 
+
+TADA!!! Got a user “redis” shell. DAMN!
+
+## Privilege Escalation (Give me the hash)
+
+Ran to the /home file to find the user named “MATT”.I found the user.txt inside but
+> PERMISSION DENIED!
+So I did what I have learned from some of the pastVulnhub MAchines. It’s Privilege
+Escalation Time.
+
+If you are new to this, (I am too)
+These sites would help a lot :
+
+https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
+
+https://guif.re/linuxeop
+
+https://www.hackingarticles.in/privilege-escalation-cheatsheet-vulnhub/
+
+Tried find the SUID Binaries to see if i could exploitthem somehow.
+
+
+Tried everything, found the OS, Kernel, Distributionblah blah blah with the above
+websites.
+To make this step easier, use this script and readabout it. (Time Saver)
+
+https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh
+
+
+Found this through the script,
+
+Checked the bash_history of user “redis” : (See somethingcommon)
+
+
+Found a backup of Some Private Key inside the /opt/as /opt/id_rsa.bak and copied to
+my Machine. (named it user.hash)
+
+
+We convert this Private-Key to John Readable Hash with /ssh2john.py so that it can be
+cracked with a appropriate wordlist.
+
+$ cd /usr/share/john
+You can see lot of keys to john-hash converter pythonscripts. Use the ssh2john.py
+$ ./ssh2john.py {Location of the saved hash} > MATT.hash
+This will convert the private ssh key to john readablehash.
+$ /usr/sbin/john --wordlist=/usr/share/wordlists/rockyou.txtMATT.hash
+We try to crack the hash with John and a Wordlist(Rockyou.txt)
+Since rockyou.txt contains lots of word and is appropriatefor this.
+
+YEAH!!! Found the user password for “Matt” to be “computer2008”
+
+Login inside the User “Matt”
+$ su Matt
+Password : computer
+
+$ cat /home/Matt/user.txt
+
+Yeah, Found the User Hash.
+Yeah Tears of JoY.
+Submitted this and went back to sleep zZzZZzZZzZzZzzjust kiddin:?
+
+
+Went back to the HTB Forums and found out this hint:
+ROOT: As said, you know are able to use an exploitthat you couldn't use before.
+
+Went back to Metasploit for the Webmin Exploit I foundearlier but that didn't work. So
+Let’s try that :
+
+It’s the webmin_packageup_rce script. Fired it upand set the options.
+Ran the script and voila!!!!
+
+It worked! Man I knew what i had to do!
+
+Found the Root Hash as well. EAZY PEAZY
+
+
+## CONCLUSION (Final Verdict)
+
+It was a fun box but I wasted a lot of time on stuffwhere there was dead-ends.
+I tried to write this as brief and simple as i couldso it may have a lack of
+professionalism.
+(man, im just having fun with this)
+I need to improve a lot and this box has given mea lot of insight on how i should
+enumerate and how i should work on future machinesas well.
+
+**Help Sources:**
+HTB Forums
+Each machine has its own thread available in HackThe box Forums.
+I read every single post on HTB Forums about Postmanbecause i was stuck on it for
+days. (I’m a newb, i told you) I would not recommendyou to go to Forums but it helps a
+lot as you can find different terms and hints whichyou can work with.
+
+Google
+Google is the best source of information availableon this planet.(I know y’all know)
+I read about every single article and watched lotof videos about Redis and Webmin
+To finally be able to crack this machine. You canfind lot of scripts, exploits and
+webshells on github and cybersecurity blogs.
+
+Read This :
+https://medium.com/bug-bounty-hunting/beginner-tips-to-own-boxes-at-hackthebox-9ae
+3fec92a
+It helped me a lot.
+
+Metasploit, Searchsploit and Github
+Metasploit contains ready made tools and scans whichhelps to get easy reverse shells
+but it is up to you whether to use them.
+
+I tried a lot of methods apart from what i have writtenin the writeup, but as we know
+they all failed or may have succeeded but with nogreater results. Thanks if you have
+reached here reading this.
+-gk2savage
+
+Website : https://gk2savage.github.io/
 
 
 
