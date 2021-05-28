@@ -4,7 +4,7 @@ tags: [linux,easy,redis,john]
 categories: HackTheBox
 ---
 
-![](/img/hacktheboxpostman/img8.jpg)
+![](/img/htb-postman/img8.jpg)
 
 We are going to pwn Postman from Hack The Box. Postman is a easy level linux machine.
 Take a cup of tea and let's get started.
@@ -48,16 +48,16 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Found that port 80 http is open, so a site must be running. 
 
-![](/img/hacktheboxpostman/img13.jpg)
+![](/img/htb-postman/img13.jpg)
 
 The site looks to be under construction.
 The Only thing I got from webpage is email address at the bottom.
 
 Tried DIRB to find out any sub-directories that may help.
 
-![](/img/hacktheboxpostman/img17.jpg)
+![](/img/htb-postman/img17.jpg)
 
-![](/img/hacktheboxpostman/img19.jpg)
+![](/img/htb-postman/img19.jpg)
 
 Tried different wordlists with dirb but the results doesn't reveal any useful directories.
 /upload had nothing useful.
@@ -66,7 +66,7 @@ Tried different wordlists with dirb but the results doesn't reveal any useful di
 Found out that the service “redis” is running on port 6379. 
 Interestingly found a nse script for redis-info.
 
-![](/img/hacktheboxpostman/img25.jpg)
+![](/img/htb-postman/img25.jpg)
 
 
 ## Exploiting Redis
@@ -96,7 +96,7 @@ First we generate the SSH KEYS with passphrase (90909090 for this case)
 $ ssh-keygen -t rsa
 ```
 
-![](/img/hacktheboxpostman/img44.jpg)
+![](/img/htb-postman/img44.jpg)
 
 Remember, don't leave the passphrase empty. I tried with an empty passphrase and
 encountered several problems, idk why. Keep it anything,just dont leave it empty.
@@ -109,7 +109,7 @@ $ (echo -e "\n\n"; cat id_rsa.pub; echo -e "\n\n")> temp.txt
 $ cat temp.txt (To Check the Key)
 ```
 
-![](/img/hacktheboxpostman/img46.jpg)
+![](/img/htb-postman/img46.jpg)
 
 So far we have generated a pair of keys, we will needto find a way to smuggle the
 public key to the Redis server.
@@ -133,13 +133,13 @@ $ redis-cli -h 10.10.10.160
 10.10.10.160:6379> save (save the key)
 ```
 
-![](/img/hacktheboxpostman/img51.jpg)
+![](/img/htb-postman/img51.jpg)
 
 Let’s Try to Connect with SSH
 
 Enter your passphrase and voila!
 
-![](/img/hacktheboxpostman/img55.jpg)
+![](/img/htb-postman/img55.jpg)
 
 TADA!!! Got a user “redis” shell. DAMN!
 
@@ -158,7 +158,7 @@ https://www.hackingarticles.in/privilege-escalation-cheatsheet-vulnhub/
 
 Tried find the SUID Binaries to see if i could exploit them somehow.
 
-![](/img/hacktheboxpostman/img61.jpg)
+![](/img/htb-postman/img61.jpg)
 
 
 Tried everything, found the OS, Kernel, Distribution blah blah blah with the above
@@ -168,21 +168,21 @@ Ran LinEnum.sh to get more details.
 
 https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh
 
-![](/img/hacktheboxpostman/img66.jpg)
+![](/img/htb-postman/img66.jpg)
 
 Found this through the script,
 
-![](/img/hacktheboxpostman/img67.jpg)
+![](/img/htb-postman/img67.jpg)
 
 Checked the bash_history of user “redis” : (See something common)
 
 
-![](/img/hacktheboxpostman/img70.jpg)
+![](/img/htb-postman/img70.jpg)
 
 Found a backup of Some Private Key inside the /opt/as /opt/id_rsa.bak and copied to
 my Machine. (named it user.hash)
 
-![](/img/hacktheboxpostman/img72.jpg)
+![](/img/htb-postman/img72.jpg)
 
 We convert this private-Key to John Readable Hash with /ssh2john.py so that it can be
 cracked with a appropriate wordlist.
@@ -193,14 +193,14 @@ $ ./ssh2john.py {Location of the saved hash} > MATT.hash
 This will convert the private ssh key to john readable hash.
 $ /usr/sbin/john --wordlist=/usr/share/wordlists/rockyou.txt MATT.hash
 
-![](/img/hacktheboxpostman/img76.jpg)
+![](/img/htb-postman/img76.jpg)
 
 YEAH!!! Found the user password for “Matt” to be “computer2008”
 
 Login inside the User “Matt”
 
 
-![](/img/hacktheboxpostman/img78.jpg)
+![](/img/htb-postman/img78.jpg)
 
 Yeah, Found the User Hash.
 
@@ -212,15 +212,15 @@ ROOT: As said, you know are able to use an exploit that you couldn't use before.
 Went back to Metasploit for the Webmin Exploit I found earlier but that didn't work. So
 Let’s try that :
 
-![](/img/hacktheboxpostman/img81.jpg)
+![](/img/htb-postman/img81.jpg)
 
 It’s the webmin_packageup_rce script. Fired it up and set the options.
 Ran the script and voila!!!!
 
-![](/img/hacktheboxpostman/img83.jpg)
+![](/img/htb-postman/img83.jpg)
 
 It worked! Man I knew what i had to do!
 
-![](/img/hacktheboxpostman/img85.jpg)
+![](/img/htb-postman/img85.jpg)
 
 Machine rooted!
