@@ -1,6 +1,7 @@
 ---
 title:     "Hack The Box - Postman"
 tags: [linux,easy,redis,john]
+layout: post
 categories: HackTheBox
 ---
 
