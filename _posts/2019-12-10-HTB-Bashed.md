@@ -8,7 +8,7 @@ categories: HackTheBox OSCP-Machines
 ![](/img/htb-bashed/bashed1.png)
 
 We are going to pwn Bashed from Hack The Box. Bashed is easy level linux machine.
-LEt's get started.
+Let's get started.
 
 Link : <https://www.hackthebox.eu/home/machines/profile/118>
 
