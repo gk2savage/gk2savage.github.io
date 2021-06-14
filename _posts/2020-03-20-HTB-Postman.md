@@ -75,7 +75,7 @@ Interestingly found a nse script for redis-info.
 Started reading about the redis in detail and to seehow it works. It is used as an
 in-memory distributed database.
 Also found this Redis Unauthorized Access Vulnerability that saved my life.
-https://medium.com/@Victor.Z.Zhu/redis-unauthorized-access-vulnerability-simulation-victor-zhu-ac7a71b2e
+>https://medium.com/@Victor.Z.Zhu/redis-unauthorized-access-vulnerability-simulation-victor-zhu-ac7a71b2e
 
 According to it,
 Under certain conditions, if Redis runs with the root account (or not even), attackers can
@@ -86,7 +86,7 @@ even lead to an encryption extortion, critically endangering normal business ser
 Nice. I looked at its simulation and started doing the same process.
 
 Also found another link with the same procedure,
-https://packetstormsecurity.com/files/134200/Redis-Remote-Command-Execution.html
+>https://packetstormsecurity.com/files/134200/Redis-Remote-Command-Execution.html
 These blogs saved my life. So I downloaded the redistools on my machine and started
 doing the same steps.
 
@@ -149,14 +149,6 @@ TADA!!! Got a user “redis” shell. DAMN!
 Ran to the /home file to find the user named “MATT”.I found the user.txt inside but
 > PERMISSION DENIED!
 
-These sites would help a lot :
-
-https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
-
-https://guif.re/linuxeop
-
-https://www.hackingarticles.in/privilege-escalation-cheatsheet-vulnhub/
-
 Tried find the SUID Binaries to see if i could exploit them somehow.
 
 ![](/img/htb-postman/img61.png)
@@ -167,7 +159,7 @@ websites.
 
 Ran LinEnum.sh to get more details.
 
-https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh
+>https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh
 
 ![](/img/htb-postman/img66.png)
 
