@@ -2,11 +2,10 @@
 title:     "Hack The Box - Postman"
 tags: [linux,easy,redis,john]
 layout: post
-categories: HackTheBox
+categories: HackTheBox 
 ---
 
 ![](/img/htb-postman/img8.jpg)
-
 
 We are going to pwn Postman from Hack The Box. Postman is a easy level linux machine.
 Take a cup of tea and let's get started.
